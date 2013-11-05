@@ -10,11 +10,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   if ['a'].pack('P').length  > 4
   	config.vm.box = "precise64"
   	config.vm.box_url = "http://files.vagrantup.com/precise64.box"
-        config.vm.provision :shell, :path => "bootstrap.sh"
+        config.vm.provision :shell, :path => "setup/setup.sh", :privileged => false
   else
   	config.vm.box = "precise32"
   	config.vm.box_url = "http://files.vagrantup.com/precise32.box"
-        config.vm.provision :shell, :path => "bootstrap.sh"
+        config.vm.provision :shell, :path => "setup/setup.sh", :privileged => false
   end
 
   # Setup network forwarding
@@ -23,7 +23,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Sync the src folder
   config.vm.synced_folder "./src", "/home/vagrant/workspace"
-  config.vm.synced_folder "./setup", "/home/vagrant/setup"
 
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
